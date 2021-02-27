@@ -6,7 +6,7 @@ Summary:	Sphinx extension which outputs QtHelp documents
 Summary(pl.UTF-8):	Rozszerzenie Sphinksa zapisujące dokumenty QtHelp
 Name:		python3-sphinxcontrib-qthelp
 Version:	1.0.3
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sphinxcontrib-qthelp/
