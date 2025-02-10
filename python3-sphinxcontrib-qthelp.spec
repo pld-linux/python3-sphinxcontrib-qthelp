@@ -5,22 +5,23 @@
 Summary:	Sphinx extension which outputs QtHelp documents
 Summary(pl.UTF-8):	Rozszerzenie Sphinksa zapisujące dokumenty QtHelp
 Name:		python3-sphinxcontrib-qthelp
-Version:	1.0.3
-Release:	5
+Version:	2.0.0
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sphinxcontrib-qthelp/
-Source0:	https://files.pythonhosted.org/packages/source/s/sphinxcontrib-qthelp/sphinxcontrib-qthelp-%{version}.tar.gz
-# Source0-md5:	93216721f3e154cce12d1e9c3307b415
+Source0:	https://pypi.debian.net/sphinxcontrib-qthelp/sphinxcontrib_qthelp-%{version}.tar.gz
+# Source0-md5:	ed4f32003b71a54ac3d68aa651cb6573
 URL:		https://pypi.org/project/sphinxcontrib-qthelp/
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
 BuildRequires:	python3-modules >= 1:3.5
-BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-Sphinx
 BuildRequires:	python3-pytest
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.714
+BuildRequires:	rpmbuild(macros) >= 2.044
 Requires:	python3-modules >= 1:3.5
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -34,10 +35,10 @@ sphinxcontrib-qthelp to rozszerzenie Sphinksa, zapisujące dokumenty
 QtHelp.
 
 %prep
-%setup -q -n sphinxcontrib-qthelp-%{version}
+%setup -q -n sphinxcontrib_qthelp-%{version}
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
@@ -47,14 +48,13 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%py3_install
+%py3_install_pyproject
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES LICENSE README.rst
+%doc CHANGES.rst LICENCE.rst README.rst
 %{py3_sitescriptdir}/sphinxcontrib/qthelp
-%{py3_sitescriptdir}/sphinxcontrib_qthelp-%{version}-py*.egg-info
-%{py3_sitescriptdir}/sphinxcontrib_qthelp-%{version}-py*-nspkg.pth
+%{py3_sitescriptdir}/sphinxcontrib_qthelp-%{version}.dist-info
